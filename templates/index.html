@@ -1,6 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+<meta name="theme-color" content="#0d6efd">
+
 <div class="row">
     <!-- Sidebar Controls -->
     <div class="col-lg-4">
@@ -143,4 +146,13 @@
         </div>
     </div>
 </div>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/static/sw.js")
+    .then(() => console.log("Service Worker registered"))
+    .catch(err => console.error("SW failed:", err));
+}
+</script>
+
 {% endblock %}
