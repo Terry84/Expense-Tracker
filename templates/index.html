@@ -1,0 +1,146 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="row">
+    <!-- Sidebar Controls -->
+    <div class="col-lg-4">
+        <!-- Monthly Goal/Income Card -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Monthly Config
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">Select View Month</label>
+                    <input type="month" id="incomeMonth" class="form-control">
+                </div>
+                <hr>
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">Set Monthly income (Kshs)</label>
+                    <div class="input-group">
+                        <input type="number" id="incomeInput" class="form-control" placeholder="000000.00">
+                        <button onclick="saveIncome()" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Expense Form -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Add New Expense
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">Description</label>
+                    <input type="text" id="expDesc" class="form-control" placeholder="Grocery, Rent, etc.">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-bold">Category</label>
+                    <select id="expCat" class="form-control">
+                        <option value="Food">Food & Dining</option>
+                        <option value="Rent">Rent/Mortgage</option>
+                        <option value="Transport">Transport</option>
+                        <option value="Bills">Utilities/Bills</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Health">Health/Medical</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label small fw-bold">Amount (Kshs)</label>
+                        <input type="number" id="expAmt" class="form-control" placeholder="0.00">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label small fw-bold">Date</label>
+                        <input type="date" id="expDate" class="form-control">
+                    </div>
+                </div>
+                <button onclick="addExpense()" class="btn btn-success w-100">
+                    <i class="bi bi-plus-circle me-1"></i> Add Expense
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div class="col-lg-8">
+        <!-- Summary Stats -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card summary-card border-salary h-100 py-2">
+                    <div class="card-body">
+                        <div class="stat-label">Income</div>
+                        <div class="stat-value" id="dispincome">Kshs</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card summary-card border-spent h-100 py-2">
+                    <div class="card-body">
+                        <div class="stat-label">Spent</div>
+                        <div class="stat-value" id="dispSpent">Kshs</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card summary-card border-balance h-100 py-2">
+                    <div class="card-body">
+                        <div class="stat-label">Balance</div>
+                        <div class="stat-value" id="dispBalance">Kshs</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card summary-card border-percent h-100 py-2">
+                    <div class="card-body">
+                        <div class="stat-label">Usage</div>
+                        <div class="stat-value" id="dispPercent">0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visuals & Details -->
+        <div class="row">
+            <!-- Chart -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Spending Breakdown</div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas id="expensePieChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Recent List -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Monthly Transactions</div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Cat</th>
+                                        <th>Note</th>
+                                        <th>Amt</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="expenseTableBody">
+                                    <!-- Dynamic content -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
