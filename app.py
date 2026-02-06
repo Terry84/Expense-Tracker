@@ -92,7 +92,7 @@ def get_summary(year, month):
         income_res = supabase.table('income').select('amount').eq('year', year).eq('month', month).execute()
         salary = income_res.data[0]['amount'] if income_res.data else 0
         
-        # Get Expenses
+        # Get expenses
         expense_res = supabase.table('expenses').select('category', 'amount').eq('year', year).eq('month', month).execute()
         expenses = expense_res.data
         
