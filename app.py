@@ -13,7 +13,7 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-12345')
 # Supabase configuration
 SUPABASE_URL = os.environ.get("https://myoeqwawrxojqnorkuhm.supabase.co")
 SUPABASE_KEY = os.environ.get("sb_publishable_NGsv28fRCpfBj4Ib1L1ZIA_vAAaLWPs")
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+supabase: Client = create_client("https://myoeqwawrxojqnorkuhm.supabase.co", "sb_publishable_NGsv28fRCpfBj4Ib1L1ZIA_vAAaLWPs")
 
 @app.route('/')
 def index():
